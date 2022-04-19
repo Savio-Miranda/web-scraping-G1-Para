@@ -18,20 +18,24 @@ soup = BeautifulSoup(html_document, 'html.parser')
 json_return = list()
 
 for news in soup.find_all('a', attrs={'class': 'feed-post-link gui-color-primary gui-color-hover'}):
-
     link = news['href']
-    print(link)
     title = news.text
 
     response = requests.get(link)
     article = response.text
+
     soup2 = BeautifulSoup(article, 'html.parser')
+
     article_datetime = None
+    article_content = list()
+
+    for content in soup2.find_all('div', attrs={'class': 'mc-column content-text active-extra-styles'}):
+        article_content.append(content.get_text())
+
     for datetime in soup2.find_all('p', attrs={'class': 'content-publication-data__updated'}):
         article_datetime = datetime.text.strip()
 
-    obj = {"title": title, "link": link, 'date': article_datetime}
-
+    obj = {"title": title, "conteudo": article_content, "link": link, 'date': article_datetime}
     json_return.append(obj)
 
 subir_json('daily_news.json', json_return)
