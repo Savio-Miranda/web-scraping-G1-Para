@@ -6,7 +6,7 @@ import json
 def subir_json(load_arquivo: str, dados: object) -> str:
     with open(load_arquivo, 'w') as banco:
         json.dump(dados, banco, indent=4, ensure_ascii=False)
-        return '*** DADOS ENVIADOS COM SUCESSO ***'
+        return '*** DATA SENT SUCCESSFULLY ***'
 
 
 BASE_URL = r'https://g1.globo.com/pa/para'
@@ -35,7 +35,7 @@ for news in soup.find_all('a', attrs={'class': 'feed-post-link gui-color-primary
     for datetime in soup2.find_all('p', attrs={'class': 'content-publication-data__updated'}):
         article_datetime = datetime.text.strip()
 
-    obj = {"title": title, "conteudo": article_content, "link": link, 'date': article_datetime}
+    obj = {"title": title, "content": article_content, "link": link, 'date': article_datetime}
     json_return.append(obj)
 
 subir_json('daily_news.json', json_return)
