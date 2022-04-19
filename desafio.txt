@@ -1,0 +1,9 @@
+*** DESAFIO WEBSCRAP ***
+
+link: https://g1.globo.com/
+
+    Entrar no site da globo, achar o link da região de belém e entrar na primeira página
+    Retornar apenas matérias de 24h, com o título e o pequeno conteúdo que aparece na tela
+    em formato: {"data": Data, "conteudo" : conteudo, "link": link}.
+
+    Obs: Salvar em JSON
